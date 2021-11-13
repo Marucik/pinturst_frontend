@@ -112,14 +112,16 @@ const Home = () => {
 				{displayedData.map((value: Post) => {
 					return <Post key={value.id} postData={value} />;
 				})}
-				<Fab
-					onClick={() => toggleFavourites()}
-					color="primary"
-					aria-label="filter-favourite"
-					sx={{ position: "fixed", right: "2rem", bottom: "2rem" }}
-				>
-					<FavoriteBorderIcon />
-				</Fab>
+				{accessToken && (
+					<Fab
+						onClick={() => toggleFavourites()}
+						color="primary"
+						aria-label="filter-favourite"
+						sx={{ position: "fixed", right: "2rem", bottom: "2rem" }}
+					>
+						<FavoriteBorderIcon />
+					</Fab>
+				)}
 			</div>
 		</>
 	);
