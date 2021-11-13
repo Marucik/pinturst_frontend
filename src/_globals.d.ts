@@ -10,6 +10,11 @@ declare interface Post {
 	updatedAt: string;
 }
 
+declare interface UserDto {
+	id: string;
+	login: string;
+}
+
 declare interface Reaction {
 	postId: string;
 	userReaction: string;

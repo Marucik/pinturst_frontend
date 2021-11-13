@@ -7,15 +7,17 @@ import {
 	IconButton,
 	LinearProgress,
 	Tooltip,
+	Avatar,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useFetch from "use-http";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import stringToColor from "../utils/stringToColor";
 
 const Post = ({ postData }: { postData: Post }) => {
 	const [reaction, setReaction] = useState<string | undefined>(undefined);
@@ -69,6 +71,13 @@ const Post = ({ postData }: { postData: Post }) => {
 			<CardHeader
 				subheader={`Added at: ${new Date(postData.createdAt).toDateString()}`}
 				title={postData.title}
+				avatar={
+					<Tooltip title={postData.author.login}>
+						<Avatar sx={{ backgroundColor: `${stringToColor(postData.author.login)}` }}>
+							{postData.author.login.charAt(0)}
+						</Avatar>
+					</Tooltip>
+				}
 				titleTypographyProps={{ sx: { fontSize: "1rem" } }}
 			/>
 			<CardMedia

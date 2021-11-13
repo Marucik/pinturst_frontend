@@ -5,6 +5,7 @@ import { Avatar, Button, Fab, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import stringToColor from "../utils/stringToColor";
 
 const Home = () => {
 	const { userProfile, logout, accessToken, getUserProfile } = useAuthContext();
@@ -79,7 +80,16 @@ const Home = () => {
 				)}
 				{accessToken ? (
 					<Button variant="outlined" onClick={logout}>
-						<Avatar sx={{ width: "24px", height: "24px", fontSize: "14px", marginRight: "6px" }}>
+						<Avatar
+							sx={{
+								width: "24px",
+								height: "24px",
+								fontSize: "14px",
+								marginRight: "6px",
+								textTransform: "none",
+								backgroundColor: `${stringToColor(userProfile?.login)}`,
+							}}
+						>
 							{userProfile?.login.charAt(0)}
 						</Avatar>
 						Logout
