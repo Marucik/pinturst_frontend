@@ -11,6 +11,7 @@ const NewPost = () => {
 	const [postDescription, setPostDescription] = useState<string | undefined>(undefined);
 	const [imageFile, setImageFile] = useState<FileList | undefined>(undefined);
 	const { accessToken } = useAuthContext();
+	const history = useHistory();
 	const { response, post } = useFetch(`http://localhost:5000/post`, {
 		headers: { Authorization: `Bearer ${accessToken}` },
 		redirect: "follow",
@@ -26,6 +27,7 @@ const NewPost = () => {
 			await post(formdata);
 			if (response.ok) {
 				toast.success("Post added successfully.");
+				history.push("/");
 			}
 		}
 	};

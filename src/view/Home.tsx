@@ -10,10 +10,11 @@ import stringToColor from "../utils/stringToColor";
 
 const Home = () => {
 	const { userProfile, logout, accessToken, getUserProfile } = useAuthContext();
-	const { data = [] } = useFetch<Post[]>("http://localhost:5000/post", []);
+	const { request, data = [] } = useFetch<Post[]>("http://localhost:5000/post", []);
 	const [areFavouritesFiltered, setAreFavouritesFiltered] = useState(false);
 	const [searchValue, setSearchValue] = useState<string>("");
 	const [displayedData, setDisplayedData] = useState<Post[]>([]);
+	const getPosts = async () => await request.get();
 
 	const fetchData = async () => {
 		getUserProfile();
@@ -21,7 +22,7 @@ const Home = () => {
 
 	const filterData = () => {
 		if (searchValue) {
-			setDisplayedData(data.filter((x: Post) => x.title.toLowerCase() === searchValue.toLowerCase()));
+			setDisplayedData(data.filter((x: Post) => x.title.toLowerCase().includes(searchValue.toLowerCase())));
 		}
 	};
 
@@ -30,8 +31,11 @@ const Home = () => {
 		setDisplayedData(data);
 	};
 
+	useEffect(() => {
+		getPosts();
+	}, []);
+
 	const toggleFavourites = () => {
-		console.log(areFavouritesFiltered);
 		if (userProfile) {
 			if (areFavouritesFiltered) {
 				setDisplayedData(data);

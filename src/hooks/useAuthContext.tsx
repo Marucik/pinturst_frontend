@@ -60,7 +60,6 @@ const useAuthHook = () => {
 	React.useEffect(() => {
 		const persistedAccessToken = localStorage.getItem("accessToken");
 		if (persistedAccessToken !== null) {
-			console.log(JSON.parse(persistedAccessToken));
 			setAccessToken(JSON.parse(persistedAccessToken));
 		}
 	}, []);
