@@ -69,7 +69,7 @@ const Post = ({ postData }: { postData: Post }) => {
 	return (
 		<Card sx={{ width: 300, margin: "1rem" }}>
 			<CardHeader
-				subheader={`Added at: ${new Date(postData.createdAt).toDateString()}`}
+				subheader={`Added at: ${new Date(postData.createdAt).toLocaleDateString("pl-PL")}`}
 				title={postData.title}
 				avatar={
 					<Tooltip title={postData.author.login}>

@@ -5,6 +5,7 @@ import { Avatar, Button, Fab, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import stringToColor from "../utils/stringToColor";
 
 const Home = () => {
@@ -125,11 +126,11 @@ const Home = () => {
 				{accessToken && (
 					<Fab
 						onClick={() => toggleFavourites()}
-						color="primary"
+						color={`${areFavouritesFiltered ? "secondary" : "primary"}`}
 						aria-label="filter-favourite"
 						sx={{ position: "fixed", right: "2rem", bottom: "2rem" }}
 					>
-						<FavoriteBorderIcon />
+						{areFavouritesFiltered ? <FavoriteIcon /> : <FavoriteBorderIcon />}
 					</Fab>
 				)}
 			</div>
